@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwc.game.chess.ky.mapper.GamePlatformConfiginfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wwc.game.chess.ky.po.GamePlatformConfiginfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="platform_type" property="platformType" jdbcType="VARCHAR" />
+    <result column="platform_type_name" property="platformTypeName" jdbcType="VARCHAR" />
+    <result column="platform_code" property="platformCode" jdbcType="VARCHAR" />
+    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="get_record_url" property="getRecordUrl" jdbcType="VARCHAR" />
+    <result column="backups_url" property="backupsUrl" jdbcType="VARCHAR" />
+    <result column="MD5Key" property="md5key" jdbcType="VARCHAR" />
+    <result column="DESKey" property="deskey" jdbcType="VARCHAR" />
+    <result column="public_key" property="publicKey" jdbcType="VARCHAR" />
+    <result column="private_key" property="privateKey" jdbcType="VARCHAR" />
+    <result column="agent_id" property="agentId" jdbcType="VARCHAR" />
+    <result column="line_code" property="lineCode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="reserve" property="reserve" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, app_id, platform_type, platform_type_name, platform_code, platform_name, enable, 
+    sort, url, get_record_url, backups_url, MD5Key, DESKey, public_key, private_key, 
+    agent_id, line_code, create_time, update_time, reserve
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wwc.game.chess.ky.po.GamePlatformConfiginfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from game_platform_configinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from game_platform_configinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from game_platform_configinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wwc.game.chess.ky.po.GamePlatformConfiginfoExample" >
+    delete from game_platform_configinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wwc.game.chess.ky.po.GamePlatformConfiginfo" >
+    insert into game_platform_configinfo (id, app_id, platform_type, 
+      platform_type_name, platform_code, platform_name, 
+      enable, sort, url, get_record_url, 
+      backups_url, MD5Key, DESKey, 
+      public_key, private_key, agent_id, 
+      line_code, create_time, update_time, 
+      reserve)
+    values (#{id,jdbcType=INTEGER}, #{appId,jdbcType=VARCHAR}, #{platformType,jdbcType=VARCHAR}, 
+      #{platformTypeName,jdbcType=VARCHAR}, #{platformCode,jdbcType=VARCHAR}, #{platformName,jdbcType=VARCHAR}, 
+      #{enable,jdbcType=BIT}, #{sort,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{getRecordUrl,jdbcType=VARCHAR}, 
+      #{backupsUrl,jdbcType=VARCHAR}, #{md5key,jdbcType=VARCHAR}, #{deskey,jdbcType=VARCHAR}, 
+      #{publicKey,jdbcType=VARCHAR}, #{privateKey,jdbcType=VARCHAR}, #{agentId,jdbcType=VARCHAR}, 
+      #{lineCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{reserve,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wwc.game.chess.ky.po.GamePlatformConfiginfo" >
+    insert into game_platform_configinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="platformType != null" >
+        platform_type,
+      </if>
+      <if test="platformTypeName != null" >
+        platform_type_name,
+      </if>
+      <if test="platformCode != null" >
+        platform_code,
+      </if>
+      <if test="platformName != null" >
+        platform_name,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="getRecordUrl != null" >
+        get_record_url,
+      </if>
+      <if test="backupsUrl != null" >
+        backups_url,
+      </if>
+      <if test="md5key != null" >
+        MD5Key,
+      </if>
+      <if test="deskey != null" >
+        DESKey,
+      </if>
+      <if test="publicKey != null" >
+        public_key,
+      </if>
+      <if test="privateKey != null" >
+        private_key,
+      </if>
+      <if test="agentId != null" >
+        agent_id,
+      </if>
+      <if test="lineCode != null" >
+        line_code,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="reserve != null" >
+        reserve,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="platformType != null" >
+        #{platformType,jdbcType=VARCHAR},
+      </if>
+      <if test="platformTypeName != null" >
+        #{platformTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="platformCode != null" >
+        #{platformCode,jdbcType=VARCHAR},
+      </if>
+      <if test="platformName != null" >
+        #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="getRecordUrl != null" >
+        #{getRecordUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="backupsUrl != null" >
+        #{backupsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="md5key != null" >
+        #{md5key,jdbcType=VARCHAR},
+      </if>
+      <if test="deskey != null" >
+        #{deskey,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null" >
+        #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null" >
+        #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="agentId != null" >
+        #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="lineCode != null" >
+        #{lineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reserve != null" >
+        #{reserve,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wwc.game.chess.ky.po.GamePlatformConfiginfoExample" resultType="java.lang.Integer" >
+    select count(*) from game_platform_configinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update game_platform_configinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.appId != null" >
+        app_id = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformType != null" >
+        platform_type = #{record.platformType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformTypeName != null" >
+        platform_type_name = #{record.platformTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformCode != null" >
+        platform_code = #{record.platformCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformName != null" >
+        platform_name = #{record.platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enable != null" >
+        enable = #{record.enable,jdbcType=BIT},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.getRecordUrl != null" >
+        get_record_url = #{record.getRecordUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backupsUrl != null" >
+        backups_url = #{record.backupsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.md5key != null" >
+        MD5Key = #{record.md5key,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deskey != null" >
+        DESKey = #{record.deskey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicKey != null" >
+        public_key = #{record.publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privateKey != null" >
+        private_key = #{record.privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentId != null" >
+        agent_id = #{record.agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineCode != null" >
+        line_code = #{record.lineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reserve != null" >
+        reserve = #{record.reserve,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update game_platform_configinfo
+    set id = #{record.id,jdbcType=INTEGER},
+      app_id = #{record.appId,jdbcType=VARCHAR},
+      platform_type = #{record.platformType,jdbcType=VARCHAR},
+      platform_type_name = #{record.platformTypeName,jdbcType=VARCHAR},
+      platform_code = #{record.platformCode,jdbcType=VARCHAR},
+      platform_name = #{record.platformName,jdbcType=VARCHAR},
+      enable = #{record.enable,jdbcType=BIT},
+      sort = #{record.sort,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR},
+      get_record_url = #{record.getRecordUrl,jdbcType=VARCHAR},
+      backups_url = #{record.backupsUrl,jdbcType=VARCHAR},
+      MD5Key = #{record.md5key,jdbcType=VARCHAR},
+      DESKey = #{record.deskey,jdbcType=VARCHAR},
+      public_key = #{record.publicKey,jdbcType=VARCHAR},
+      private_key = #{record.privateKey,jdbcType=VARCHAR},
+      agent_id = #{record.agentId,jdbcType=VARCHAR},
+      line_code = #{record.lineCode,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      reserve = #{record.reserve,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wwc.game.chess.ky.po.GamePlatformConfiginfo" >
+    update game_platform_configinfo
+    <set >
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="platformType != null" >
+        platform_type = #{platformType,jdbcType=VARCHAR},
+      </if>
+      <if test="platformTypeName != null" >
+        platform_type_name = #{platformTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="platformCode != null" >
+        platform_code = #{platformCode,jdbcType=VARCHAR},
+      </if>
+      <if test="platformName != null" >
+        platform_name = #{platformName,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="getRecordUrl != null" >
+        get_record_url = #{getRecordUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="backupsUrl != null" >
+        backups_url = #{backupsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="md5key != null" >
+        MD5Key = #{md5key,jdbcType=VARCHAR},
+      </if>
+      <if test="deskey != null" >
+        DESKey = #{deskey,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null" >
+        public_key = #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null" >
+        private_key = #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="agentId != null" >
+        agent_id = #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="lineCode != null" >
+        line_code = #{lineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reserve != null" >
+        reserve = #{reserve,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wwc.game.chess.ky.po.GamePlatformConfiginfo" >
+    update game_platform_configinfo
+    set app_id = #{appId,jdbcType=VARCHAR},
+      platform_type = #{platformType,jdbcType=VARCHAR},
+      platform_type_name = #{platformTypeName,jdbcType=VARCHAR},
+      platform_code = #{platformCode,jdbcType=VARCHAR},
+      platform_name = #{platformName,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      get_record_url = #{getRecordUrl,jdbcType=VARCHAR},
+      backups_url = #{backupsUrl,jdbcType=VARCHAR},
+      MD5Key = #{md5key,jdbcType=VARCHAR},
+      DESKey = #{deskey,jdbcType=VARCHAR},
+      public_key = #{publicKey,jdbcType=VARCHAR},
+      private_key = #{privateKey,jdbcType=VARCHAR},
+      agent_id = #{agentId,jdbcType=VARCHAR},
+      line_code = #{lineCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      reserve = #{reserve,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

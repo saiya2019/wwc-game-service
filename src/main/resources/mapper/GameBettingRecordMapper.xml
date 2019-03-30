@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwc.game.chess.ky.mapper.GameBettingRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.wwc.game.chess.ky.po.GameBettingRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="game_platform_id" property="gamePlatformId" jdbcType="INTEGER" />
+    <result column="game_platform_name" property="gamePlatformName" jdbcType="VARCHAR" />
+    <result column="game_bureau_id" property="gameBureauId" jdbcType="VARCHAR" />
+    <result column="accounts" property="accounts" jdbcType="VARCHAR" />
+    <result column="server_id" property="serverId" jdbcType="INTEGER" />
+    <result column="kind_id" property="kindId" jdbcType="INTEGER" />
+    <result column="table_id" property="tableId" jdbcType="INTEGER" />
+    <result column="chair_id" property="chairId" jdbcType="INTEGER" />
+    <result column="user_count" property="userCount" jdbcType="INTEGER" />
+    <result column="card_value" property="cardValue" jdbcType="INTEGER" />
+    <result column="cell_score" property="cellScore" jdbcType="DOUBLE" />
+    <result column="all_bet" property="allBet" jdbcType="DOUBLE" />
+    <result column="profit" property="profit" jdbcType="DOUBLE" />
+    <result column="revenue" property="revenue" jdbcType="DOUBLE" />
+    <result column="game_start_time" property="gameStartTime" jdbcType="VARCHAR" />
+    <result column="game_end_time" property="gameEndTime" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="INTEGER" />
+    <result column="line_code" property="lineCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, app_id, game_platform_id, game_platform_name, game_bureau_id, accounts, server_id, 
+    kind_id, table_id, chair_id, user_count, card_value, cell_score, all_bet, profit, 
+    revenue, game_start_time, game_end_time, channel_id, line_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wwc.game.chess.ky.po.GameBettingRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from game_betting_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from game_betting_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from game_betting_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wwc.game.chess.ky.po.GameBettingRecordExample" >
+    delete from game_betting_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wwc.game.chess.ky.po.GameBettingRecord" >
+    insert into game_betting_record (id, app_id, game_platform_id, 
+      game_platform_name, game_bureau_id, accounts, 
+      server_id, kind_id, table_id, 
+      chair_id, user_count, card_value, 
+      cell_score, all_bet, profit, 
+      revenue, game_start_time, game_end_time, 
+      channel_id, line_code)
+    values (#{id,jdbcType=BIGINT}, #{appId,jdbcType=VARCHAR}, #{gamePlatformId,jdbcType=INTEGER}, 
+      #{gamePlatformName,jdbcType=VARCHAR}, #{gameBureauId,jdbcType=VARCHAR}, #{accounts,jdbcType=VARCHAR}, 
+      #{serverId,jdbcType=INTEGER}, #{kindId,jdbcType=INTEGER}, #{tableId,jdbcType=INTEGER}, 
+      #{chairId,jdbcType=INTEGER}, #{userCount,jdbcType=INTEGER}, #{cardValue,jdbcType=INTEGER}, 
+      #{cellScore,jdbcType=DOUBLE}, #{allBet,jdbcType=DOUBLE}, #{profit,jdbcType=DOUBLE}, 
+      #{revenue,jdbcType=DOUBLE}, #{gameStartTime,jdbcType=VARCHAR}, #{gameEndTime,jdbcType=VARCHAR}, 
+      #{channelId,jdbcType=INTEGER}, #{lineCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wwc.game.chess.ky.po.GameBettingRecord" >
+    insert into game_betting_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="gamePlatformId != null" >
+        game_platform_id,
+      </if>
+      <if test="gamePlatformName != null" >
+        game_platform_name,
+      </if>
+      <if test="gameBureauId != null" >
+        game_bureau_id,
+      </if>
+      <if test="accounts != null" >
+        accounts,
+      </if>
+      <if test="serverId != null" >
+        server_id,
+      </if>
+      <if test="kindId != null" >
+        kind_id,
+      </if>
+      <if test="tableId != null" >
+        table_id,
+      </if>
+      <if test="chairId != null" >
+        chair_id,
+      </if>
+      <if test="userCount != null" >
+        user_count,
+      </if>
+      <if test="cardValue != null" >
+        card_value,
+      </if>
+      <if test="cellScore != null" >
+        cell_score,
+      </if>
+      <if test="allBet != null" >
+        all_bet,
+      </if>
+      <if test="profit != null" >
+        profit,
+      </if>
+      <if test="revenue != null" >
+        revenue,
+      </if>
+      <if test="gameStartTime != null" >
+        game_start_time,
+      </if>
+      <if test="gameEndTime != null" >
+        game_end_time,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="lineCode != null" >
+        line_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="gamePlatformId != null" >
+        #{gamePlatformId,jdbcType=INTEGER},
+      </if>
+      <if test="gamePlatformName != null" >
+        #{gamePlatformName,jdbcType=VARCHAR},
+      </if>
+      <if test="gameBureauId != null" >
+        #{gameBureauId,jdbcType=VARCHAR},
+      </if>
+      <if test="accounts != null" >
+        #{accounts,jdbcType=VARCHAR},
+      </if>
+      <if test="serverId != null" >
+        #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="kindId != null" >
+        #{kindId,jdbcType=INTEGER},
+      </if>
+      <if test="tableId != null" >
+        #{tableId,jdbcType=INTEGER},
+      </if>
+      <if test="chairId != null" >
+        #{chairId,jdbcType=INTEGER},
+      </if>
+      <if test="userCount != null" >
+        #{userCount,jdbcType=INTEGER},
+      </if>
+      <if test="cardValue != null" >
+        #{cardValue,jdbcType=INTEGER},
+      </if>
+      <if test="cellScore != null" >
+        #{cellScore,jdbcType=DOUBLE},
+      </if>
+      <if test="allBet != null" >
+        #{allBet,jdbcType=DOUBLE},
+      </if>
+      <if test="profit != null" >
+        #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="revenue != null" >
+        #{revenue,jdbcType=DOUBLE},
+      </if>
+      <if test="gameStartTime != null" >
+        #{gameStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="gameEndTime != null" >
+        #{gameEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="lineCode != null" >
+        #{lineCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wwc.game.chess.ky.po.GameBettingRecordExample" resultType="java.lang.Integer" >
+    select count(*) from game_betting_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update game_betting_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.appId != null" >
+        app_id = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gamePlatformId != null" >
+        game_platform_id = #{record.gamePlatformId,jdbcType=INTEGER},
+      </if>
+      <if test="record.gamePlatformName != null" >
+        game_platform_name = #{record.gamePlatformName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gameBureauId != null" >
+        game_bureau_id = #{record.gameBureauId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accounts != null" >
+        accounts = #{record.accounts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverId != null" >
+        server_id = #{record.serverId,jdbcType=INTEGER},
+      </if>
+      <if test="record.kindId != null" >
+        kind_id = #{record.kindId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tableId != null" >
+        table_id = #{record.tableId,jdbcType=INTEGER},
+      </if>
+      <if test="record.chairId != null" >
+        chair_id = #{record.chairId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userCount != null" >
+        user_count = #{record.userCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardValue != null" >
+        card_value = #{record.cardValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.cellScore != null" >
+        cell_score = #{record.cellScore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.allBet != null" >
+        all_bet = #{record.allBet,jdbcType=DOUBLE},
+      </if>
+      <if test="record.profit != null" >
+        profit = #{record.profit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.revenue != null" >
+        revenue = #{record.revenue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.gameStartTime != null" >
+        game_start_time = #{record.gameStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gameEndTime != null" >
+        game_end_time = #{record.gameEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelId != null" >
+        channel_id = #{record.channelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineCode != null" >
+        line_code = #{record.lineCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update game_betting_record
+    set id = #{record.id,jdbcType=BIGINT},
+      app_id = #{record.appId,jdbcType=VARCHAR},
+      game_platform_id = #{record.gamePlatformId,jdbcType=INTEGER},
+      game_platform_name = #{record.gamePlatformName,jdbcType=VARCHAR},
+      game_bureau_id = #{record.gameBureauId,jdbcType=VARCHAR},
+      accounts = #{record.accounts,jdbcType=VARCHAR},
+      server_id = #{record.serverId,jdbcType=INTEGER},
+      kind_id = #{record.kindId,jdbcType=INTEGER},
+      table_id = #{record.tableId,jdbcType=INTEGER},
+      chair_id = #{record.chairId,jdbcType=INTEGER},
+      user_count = #{record.userCount,jdbcType=INTEGER},
+      card_value = #{record.cardValue,jdbcType=INTEGER},
+      cell_score = #{record.cellScore,jdbcType=DOUBLE},
+      all_bet = #{record.allBet,jdbcType=DOUBLE},
+      profit = #{record.profit,jdbcType=DOUBLE},
+      revenue = #{record.revenue,jdbcType=DOUBLE},
+      game_start_time = #{record.gameStartTime,jdbcType=VARCHAR},
+      game_end_time = #{record.gameEndTime,jdbcType=VARCHAR},
+      channel_id = #{record.channelId,jdbcType=INTEGER},
+      line_code = #{record.lineCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wwc.game.chess.ky.po.GameBettingRecord" >
+    update game_betting_record
+    <set >
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="gamePlatformId != null" >
+        game_platform_id = #{gamePlatformId,jdbcType=INTEGER},
+      </if>
+      <if test="gamePlatformName != null" >
+        game_platform_name = #{gamePlatformName,jdbcType=VARCHAR},
+      </if>
+      <if test="gameBureauId != null" >
+        game_bureau_id = #{gameBureauId,jdbcType=VARCHAR},
+      </if>
+      <if test="accounts != null" >
+        accounts = #{accounts,jdbcType=VARCHAR},
+      </if>
+      <if test="serverId != null" >
+        server_id = #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="kindId != null" >
+        kind_id = #{kindId,jdbcType=INTEGER},
+      </if>
+      <if test="tableId != null" >
+        table_id = #{tableId,jdbcType=INTEGER},
+      </if>
+      <if test="chairId != null" >
+        chair_id = #{chairId,jdbcType=INTEGER},
+      </if>
+      <if test="userCount != null" >
+        user_count = #{userCount,jdbcType=INTEGER},
+      </if>
+      <if test="cardValue != null" >
+        card_value = #{cardValue,jdbcType=INTEGER},
+      </if>
+      <if test="cellScore != null" >
+        cell_score = #{cellScore,jdbcType=DOUBLE},
+      </if>
+      <if test="allBet != null" >
+        all_bet = #{allBet,jdbcType=DOUBLE},
+      </if>
+      <if test="profit != null" >
+        profit = #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="revenue != null" >
+        revenue = #{revenue,jdbcType=DOUBLE},
+      </if>
+      <if test="gameStartTime != null" >
+        game_start_time = #{gameStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="gameEndTime != null" >
+        game_end_time = #{gameEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="lineCode != null" >
+        line_code = #{lineCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wwc.game.chess.ky.po.GameBettingRecord" >
+    update game_betting_record
+    set app_id = #{appId,jdbcType=VARCHAR},
+      game_platform_id = #{gamePlatformId,jdbcType=INTEGER},
+      game_platform_name = #{gamePlatformName,jdbcType=VARCHAR},
+      game_bureau_id = #{gameBureauId,jdbcType=VARCHAR},
+      accounts = #{accounts,jdbcType=VARCHAR},
+      server_id = #{serverId,jdbcType=INTEGER},
+      kind_id = #{kindId,jdbcType=INTEGER},
+      table_id = #{tableId,jdbcType=INTEGER},
+      chair_id = #{chairId,jdbcType=INTEGER},
+      user_count = #{userCount,jdbcType=INTEGER},
+      card_value = #{cardValue,jdbcType=INTEGER},
+      cell_score = #{cellScore,jdbcType=DOUBLE},
+      all_bet = #{allBet,jdbcType=DOUBLE},
+      profit = #{profit,jdbcType=DOUBLE},
+      revenue = #{revenue,jdbcType=DOUBLE},
+      game_start_time = #{gameStartTime,jdbcType=VARCHAR},
+      game_end_time = #{gameEndTime,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=INTEGER},
+      line_code = #{lineCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

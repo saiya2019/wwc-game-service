@@ -1,0 +1,28 @@
+server:
+  port: 8062
+#公共配置与profiles选择无关
+mybatis:
+  typeAliasesPackage: com.wwc.game.chess.ky.po
+  mapperLocations: classpath:mapper/*.xml
+
+#日志
+logging:
+  level:
+    com.wwc.game.chess.ky.mapper: DEBUG
+
+#开发配置
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/wwc-game?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    #type: com.alibaba.druid.pool.DruidDataSource
+    #connectionProperties: druid.stat.mergeSql=true
+    application:
+      name: wwc-game
+
+sql:
+  interceptor:
+    default:
+      enable: true
